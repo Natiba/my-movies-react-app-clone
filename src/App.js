@@ -1,36 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import CardTv from './components/cardTv';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-const TvProgram = () => {
+// import Nav from "./components/nav";
+import NavBar from "./components/NavBar";
+import Home from "./views/Home";
+import Movies from "./views/Movies";
+import MovieDetails from "./components/MovieDetails";
+import TvProgram from "./views/TvProgram";
+import SeriesDetails from "./components/SeriesDetails";
+import People from "./views/People";
+import PeopleDetails from "./components/PeopleDetails";
+import More from "./views/More";
+import Search from "./components/Search";
+import Favorite from "./components/Favorite";
+import NotFound from "./components/NotFound";
 
-    const [tv, setTv] = useState([]);
-    console.log(tv)
-    
+// import GlobalProvider from "./context/GlobalState";
 
-    useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API_KEY_TMDB}`)
-    .then(response => response.json())
-    .then((data) => {setTv(data.results);
-    });
-    } ,[]);
+function App() {
+  debugger
+  return (
+    // <GlobalProvider>
+    <Router>
+      
+      <NavBar />
 
-    return ( 
-    <>
-    <h1 style={{textAlign: 'center', margin: "2rem", color: "white"}}>Series</h1>
-    <div className="all-container">
-        <ul>{tv.map(item => 
-        <CardTv key = {item.id}
-        image={item.poster_path} 
-        title={item.name} 
-        country={item.origin_country}
-        id={item.id}
-        />)}
-        </ul>
-        </div>
-    </>
-     );
+      <Routes>
+      
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/movies">
+        <Movies />
+        </Route>
+        <Route exact path="/movies/:id">
+        <MovieDetails />
+        </Route>
+        <Route exact path="/series">
+          <TvProgram />
+        </Route>
+        <Route exact path="/series/:id">
+        <SeriesDetails />
+        </Route>
+        <Route exact path="/people">
+          <People />
+        </Route>
+        <Route exact path="/people/:id">
+        <PeopleDetails />
+        </Route>
+        <Route exact path="/more">
+          <More />
+        </Route>
+        <Route exact path="/search">
+          <Search />
+        </Route>
+        <Route exact path="/favorites">
+         <Favorite />
+        </Route>
+        <Route exact path="*">
+          <NotFound />
+        </Route>
+      </Routes>
+    </Router>
+    // </GlobalProvider>
+  );
 }
- 
-export default TvProgram;
+
+export default App;
+
 
 

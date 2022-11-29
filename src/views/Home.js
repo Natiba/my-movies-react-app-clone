@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import CaroHome from '../components/caroHome';
-import CarouselCard from '../components/CarouselCard';
+import CarouselCard from '../components/cardCarousel';
 import Popular from '../components/Popular';
 import Trends from '../components/Trends';
 // import Carousel from 'react-bootstrap/Carousel'
